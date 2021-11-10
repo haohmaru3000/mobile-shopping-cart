@@ -10,7 +10,8 @@ import '../models/product.dart';
  *    interested in data provided by this class.
  */
 class Products with ChangeNotifier {
-  final List<Product> _items = [ // A list which can be changed over time and not final
+  final List<Product> _items = [
+    // A list which can be changed over time and not final
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -46,7 +47,13 @@ class Products with ChangeNotifier {
   ];
 
   List<Product> get items {
-    return [..._items]; // Return a copy of "_items" to ensure it can't be changed directly from outside
+    return [
+      ..._items
+    ]; // Return a copy of "_items" to ensure it can't be changed directly from outside
+  }
+
+  Product findById(String id) {
+    return _items.firstWhere((prod) => prod.id == id);
   }
 
   void addProduct() {
