@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
+import 'product.dart';
 
 /*  ChangeNotifier: kind of related to the inherited widget that the provider package uses,
  *                  and allows us to establish behind the scene communication turnel with the

@@ -16,7 +16,8 @@ class ProductDetailScreen extends StatelessWidget {
     /* Just want to get data from the global data storage once time but not update after change of data */
     final loadedProduct = Provider.of<Products>(
       context,
-      listen: false, // this widget won't rebuild if notifyListeners is called because "Products" data change
+      listen:
+          false, // this widget won't rebuild if notifyListeners is called because "Products" data change
     ).findById(productId);
     return Scaffold(
       appBar: AppBar(
