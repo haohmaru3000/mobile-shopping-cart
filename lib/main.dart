@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.purple,
             accentColor: Colors.deepOrange,
+            errorColor: Colors.red,
           ),
         ),
         home: ProductsOverviewScreen(),
