@@ -4,15 +4,19 @@ import '../providers/products.dart';
 import './product_item.dart';
 
 class ProductsGrid extends StatelessWidget {
-  // Fetch all data in here by setting up a listener
+  final bool showFavs;
 
+  ProductsGrid(this.showFavs);
+
+  // Fetch all data in here by setting up a listener
   @override
   Widget build(BuildContext context) {
     // Listen to changes in direct/indirect parent classes that has setup a Provider
     // (want to establish a communication channel to the provided instance of the products class)
     final productsData = Provider.of<Products>(context);
-    final products =
-        productsData.items; // fetch from productsData by accessing items
+    final products = showFavs
+        ? productsData.favoriteItems
+        : productsData.items; // fetch from productsData by accessing items
 
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
