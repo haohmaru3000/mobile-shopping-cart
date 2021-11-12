@@ -21,19 +21,21 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          title: 'Shopping cart',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.purple,
-              accentColor: Colors.deepOrange,
-            ),
-            fontFamily: 'Lato',
+        title: 'Shopping cart',
+        theme: ThemeData(
+          fontFamily: 'Lato',
+          primarySwatch: Colors.purple,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.deepOrange,
           ),
-          home: ProductsOverviewScreen(),
-          routes: {
-            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-            CartScreen.routeName: (ctx) => CartScreen(),
-          }),
+        ),
+        home: ProductsOverviewScreen(),
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
+        },
+      ),
     );
   }
 }
