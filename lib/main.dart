@@ -12,19 +12,18 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => Products(),
       child: MaterialApp(
-        title: 'Shopping cart',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          colorScheme: ColorScheme.fromSwatch(
-            accentColor: Colors.deepOrange,
+          title: 'Shopping cart',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            colorScheme: ColorScheme.fromSwatch(
+              accentColor: Colors.deepOrange,
+            ),
+            fontFamily: 'Lato',
           ),
-          fontFamily: 'Lato',
-        ),
-        home: ProductsOverviewScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-        }
-      ),
+          home: ProductsOverviewScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          }),
     );
   }
 }
