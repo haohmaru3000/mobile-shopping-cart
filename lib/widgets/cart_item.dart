@@ -36,6 +36,34 @@ class CartItem extends StatelessWidget {
         ),
       ),
       direction: DismissDirection.endToStart,
+      confirmDismiss: (direction) {
+        // Not using Scaffold bc it's not attached to a page (a dialog can be shown anywhere)
+        // "context": we give it this so that it knows which widget is to attach itself
+        return showDialog(
+          // The Future will be called whenever the dialog is closed
+          context: context,
+          builder: (ctx) => AlertDialog(
+            // builder always gives us its own context which is "ctx"
+            title: const Text('Are you sure?'),
+            content:
+                const Text('Do you want to remove the item from the cart?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(false);
+                },
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                },
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        );
+      },
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
