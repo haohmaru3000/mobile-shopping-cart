@@ -60,16 +60,43 @@ class Cart with ChangeNotifier {
         ),
       );
     }
-    notifyListeners();
+    notifyListeners(); // Notify the listeners about the update
   }
 
   void removeItem(String productId) {
     _items.remove(productId);
-    notifyListeners();
+    notifyListeners(); // Notify the listeners about the update
+  }
+
+  /* 
+   *  Remove the latest item in the list
+   */
+  void removeSingleItem(String productId) {
+    if (!_items.containsKey(productId)) {
+      // Checking whether it's actually part of the cart
+      return;
+    }
+    if (_items[productId]!.quantity > 1) {
+      // Only reduce the quantity if >1
+      _items.update(
+        productId,
+        (existingCartItem) => CartItem(
+          id: existingCartItem.id,
+          title: existingCartItem.title,
+          price: existingCartItem.price,
+          quantity: existingCartItem.quantity - 1,
+        ),
+      );
+    } else // If = 1, remove the entire item from the map
+    {
+      // Remove the entire key, also the value mapped to the key from the map
+      _items.remove(productId);
+    }
+    notifyListeners(); // Notify the listeners about the update
   }
 
   void clear() {
     _items = {};
-    notifyListeners();
+    notifyListeners(); // Notify the listeners about the update
   }
 }
