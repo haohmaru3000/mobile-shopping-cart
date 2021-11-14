@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
  *      => We want to manage the User input and validate it and so on, locally in this widget
  */
 class EditProductScreen extends StatefulWidget {
+  static const routeName = '/edit-product';
+
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
 }
@@ -21,9 +23,23 @@ class _EditProductScreenState extends State<EditProductScreen> {
     // Standalone page
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        title: const Text('Edit Product'),
       ),
-      body: null,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          child: ListView(
+            children: <Widget>[
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                ),
+                textInputAction: TextInputAction.next,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
