@@ -94,4 +94,10 @@ class Products with ChangeNotifier {
       print('...');
     }
   }
+
+  /* Delete a specific product based on an product-id provided by someone */
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.id.toString() == id);
+    notifyListeners();
+  }
 }
