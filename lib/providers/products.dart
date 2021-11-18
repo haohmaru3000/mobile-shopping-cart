@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'product.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import './product.dart';
 
 /*  ChangeNotifier: kind of related to the inherited widget that the provider package uses,
  *                  and allows us to establish behind the scene communication turnel with the
@@ -72,6 +74,20 @@ class Products with ChangeNotifier {
 
   /* Add a new product into the current list of products */
   void addProduct(Product product) {
+    final url = Uri.https("flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
+    http.post(
+      url, 
+      body: json.encode(
+        {
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+          'isFavorite': product.isFavorite,
+        }
+      ),
+    );
+
     final newProduct = Product(
       title: product.title,
       description: product.description,
