@@ -98,6 +98,9 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners(); // Notify widget classes listening to this class about changes in "_items" to be rebuilt
+    }).catchError((error) {
+      print(error);
+      throw error;
     });
   }
 
