@@ -73,21 +73,21 @@ class Products with ChangeNotifier {
   // }
 
   /* Add a new product into the current list of products */
-  Future<void> addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
     final url = Uri.https(
         "flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
-    return http
-        .post(
-      url,
-      body: json.encode({
-        'title': product.title,
-        'description': product.description,
-        'imageUrl': product.imageUrl,
-        'price': product.price,
-        'isFavorite': product.isFavorite,
-      }),
-    )
-        .then((response) {
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+          'isFavorite': product.isFavorite,
+        }),
+      );
+
       final newProduct = Product(
         title: product.title,
         description: product.description,
@@ -98,10 +98,10 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners(); // Notify widget classes listening to this class about changes in "_items" to be rebuilt
-    }).catchError((error) {
+    } catch (error) {
       print(error);
       throw error;
-    });
+    }
   }
 
   /* Edit and update the information about the selected product */
