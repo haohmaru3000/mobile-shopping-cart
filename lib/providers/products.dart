@@ -72,6 +72,17 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
+  Future<void> fetchAndSetProducts() async {
+    final url = Uri.https(
+        "flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
+    try {
+      final response = await http.get(url);
+      print(json.decode(response.body));
+    } catch (error) {
+      throw (error);
+    }
+  }
+
   /* Add a new product into the current list of products */
   Future<void> addProduct(Product product) async {
     final url = Uri.https(
