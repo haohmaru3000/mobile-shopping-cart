@@ -150,7 +150,19 @@ class Products with ChangeNotifier {
 
   /* Delete a specific product based on an product-id provided by someone */
   void deleteProduct(String id) {
-    _items.removeWhere((prod) => prod.id.toString() == id);
+    final url = Uri.https(
+        "flutter-cart-1-default-rtdb.firebaseio.com", "/products/$id.json");
+    final existingProductIndex =
+        _items.indexWhere((prod) => prod.id.toString() == id);
+    Product? existingProduct = _items[existingProductIndex];
+    http.delete(url).then((response) {
+      if (response.statusCode >= 400) {}
+      existingProduct = null;
+    }).catchError((_) {
+      _items.insert(existingProductIndex, existingProduct as Product);
+      notifyListeners();
+    });
+    _items.removeAt(existingProductIndex);
     notifyListeners();
   }
 }
