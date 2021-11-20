@@ -78,7 +78,10 @@ class Products with ChangeNotifier {
         "flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
     try {
       final response = await http.get(url);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final extractedData = json.decode(response.body)! as Map<String, dynamic>;
+      // if (extractedData == null) {
+      //   return;
+      // }
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
         loadedProducts.add(Product(
