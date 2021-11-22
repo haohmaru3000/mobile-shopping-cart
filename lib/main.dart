@@ -11,7 +11,6 @@ import './providers/products.dart';
 import './screens/product_detail_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
-import './providers/product.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
           value: Auth(),
         ),
         ChangeNotifierProxyProvider<Auth, Products>(
-          create: (ctx) => Products('', []),
+          create: (ctx) => Products(null, []),
           update: (ctx, auth, previousProducts) => Products(
             auth.token.toString(),
             previousProducts == null ? [] : previousProducts.items,
