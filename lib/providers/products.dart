@@ -49,6 +49,10 @@ class Products with ChangeNotifier {
     // ),
   ];
 
+  final String authToken;
+
+  Products(this.authToken, this._items);
+
   List<Product> get items {
     return [
       ..._items
@@ -74,11 +78,11 @@ class Products with ChangeNotifier {
   // }
 
   Future<void> fetchAndSetProducts() async {
-    final url = Uri.https(
-        "flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
+    final url = Uri.https("flutter-cart-1-default-rtdb.firebaseio.com",
+        "/products.json?auth=$authToken");
     try {
       final response = await http.get(url);
-      final extractedData = json.decode(response.body)! as Map<String, dynamic>;
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
       // if (extractedData == null) {
       //   return;
       // }
@@ -96,7 +100,7 @@ class Products with ChangeNotifier {
       _items = loadedProducts;
       notifyListeners();
     } catch (error) {
-      throw (error);
+      rethrow;
     }
   }
 
@@ -128,7 +132,7 @@ class Products with ChangeNotifier {
       notifyListeners(); // Notify widget classes listening to this class about changes in "_items" to be rebuilt
     } catch (error) {
       print(error);
-      throw error;
+      rethrow;
     }
   }
 
