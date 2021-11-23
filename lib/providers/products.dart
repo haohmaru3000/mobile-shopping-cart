@@ -128,8 +128,8 @@ class Products with ChangeNotifier {
 
   /* Add a new product into the current list of products */
   Future<void> addProduct(Product product) async {
-    final url = Uri.https(
-        "flutter-cart-1-default-rtdb.firebaseio.com", "/products.json");
+    final url = Uri.parse(
+        "https://flutter-cart-1-default-rtdb.firebaseio.com/products.json?auth=${_authToken}");
     try {
       final response = await http.post(
         url,
@@ -162,8 +162,8 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id.toString() == id);
     if (prodIndex >= 0) {
-      final url = Uri.https(
-          "flutter-cart-1-default-rtdb.firebaseio.com", "/products/$id.json");
+      final url = Uri.parse(
+          "https://flutter-cart-1-default-rtdb.firebaseio.com/products/$id.json?auth=${_authToken}");
       await http.patch(url,
           body: json.encode({
             'title': newProduct.title,
@@ -180,8 +180,8 @@ class Products with ChangeNotifier {
 
   /* Delete a specific product based on an product-id provided by someone */
   Future<void> deleteProduct(String id) async {
-    final url = Uri.https(
-        "flutter-cart-1-default-rtdb.firebaseio.com", "/products/$id.json");
+    final url = Uri.parse(
+        "https://flutter-cart-1-default-rtdb.firebaseio.com/products/$id.json?auth=${_authToken}");
     final existingProductIndex =
         _items.indexWhere((prod) => prod.id.toString() == id);
     Product? existingProduct = _items[existingProductIndex];

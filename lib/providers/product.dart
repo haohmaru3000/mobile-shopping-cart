@@ -25,12 +25,12 @@ class Product with ChangeNotifier {
   }
 
   /* Changing the favourite status of a selected product */
-  Future<void> toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String token) async {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
-    final url = Uri.https(
-        "flutter-cart-1-default-rtdb.firebaseio.com", "/products/$id.json");
+    final url = Uri.parse(
+        "https://flutter-cart-1-default-rtdb.firebaseio.com/products/$id.json?auth=$token");
     try {
       final response = await http.patch(
         url,
