@@ -8,7 +8,7 @@ class Product with ChangeNotifier {
   final String description;
   final double price;
   final String imageUrl;
-  bool isFavorite;
+  bool? isFavorite;
 
   Product({
     required this.id,
@@ -19,7 +19,7 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  void _setFavValue(bool newValue) {
+  void _setFavValue(bool? newValue) {
     isFavorite = newValue;
     notifyListeners();
   }
@@ -27,7 +27,7 @@ class Product with ChangeNotifier {
   /* Changing the favourite status of a selected product */
   Future<void> toggleFavoriteStatus(String token, String userId) async {
     final oldStatus = isFavorite;
-    isFavorite = !isFavorite;
+    isFavorite = !(isFavorite as bool);
     notifyListeners();
     final url = Uri.parse(
         "https://flutter-cart-1-default-rtdb.firebaseio.com/userFavorites/$userId/$id.json?auth=$token");
