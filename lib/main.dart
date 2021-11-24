@@ -11,6 +11,7 @@ import './providers/products.dart';
 import './screens/product_detail_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
+import './screens/splash_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -54,7 +55,16 @@ class MyApp extends StatelessWidget {
               errorColor: Colors.red,
             ),
           ),
-          home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+          home: auth.isAuth
+              ? ProductsOverviewScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? SplashScreen()
+                          : AuthScreen(),
+                ),
           // Setup a list of Routers
           routes: {
             ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
