@@ -22,29 +22,34 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              ProductDetailScreen.routeName,
-              arguments: product.id,
-            );
-          },
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
-          ),
-        ),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                ProductDetailScreen.routeName,
+                arguments: product.id,
+              );
+            },
+            child: FadeInImage(
+              placeholder:
+                  const AssetImage('assets/images/product-placeholder.png'),
+              image: NetworkImage(product.imageUrl),
+              fit: BoxFit.cover,
+            )),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           // Establish connection to provided data, it looks for the nearest provider of that type up in the widget tree.
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
               icon: Icon(
-                (product.isFavorite != null) ? ((product.isFavorite as bool) ? Icons.favorite : Icons.favorite_border) : Icons.favorite_border,
+                (product.isFavorite != null)
+                    ? ((product.isFavorite as bool)
+                        ? Icons.favorite
+                        : Icons.favorite_border)
+                    : Icons.favorite_border,
               ),
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
                 product.toggleFavoriteStatus(
-                  authData.token.toString(), 
+                  authData.token.toString(),
                   authData.userId.toString(),
                 );
               },
