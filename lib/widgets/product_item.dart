@@ -22,18 +22,22 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                ProductDetailScreen.routeName,
-                arguments: product.id,
-              );
-            },
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetailScreen.routeName,
+              arguments: product.id,
+            );
+          },
+          child: Hero(
+            tag: product.id!,
             child: FadeInImage(
               placeholder:
                   const AssetImage('assets/images/product-placeholder.png'),
               image: NetworkImage(product.imageUrl),
               fit: BoxFit.cover,
-            )),
+            ),
+          ),
+        ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           // Establish connection to provided data, it looks for the nearest provider of that type up in the widget tree.
