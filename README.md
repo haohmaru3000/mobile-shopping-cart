@@ -1,16 +1,12 @@
 # mobile_shopping_cart
 
-A new Flutter project.
+A Flutter application with essential features for Shopping Online.
 
-## Getting Started
+## How to run the Project for testing:
 
-This project is a starting point for a Flutter application.
+The project has the authentication feature which means that the user needs to log in to their account based on their account info stored in the Database before being able to get in to use the application's features.
+The application also has a Demo account with info already stored in the Database so all of us can use this account to do some test. 
+The log-in information for this Demo account is shown as below:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Username: test@test.com
+Password: 123456
