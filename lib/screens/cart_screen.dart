@@ -33,8 +33,10 @@ class CartScreen extends StatelessWidget {
                     label: Text(
                       '\$${cart.totalAmount.toStringAsFixed(2)}',
                       style: TextStyle(
-                        color:
-                            Theme.of(context).primaryTextTheme.headline6!.color,
+                        color: Theme.of(context)
+                            .primaryTextTheme
+                            .titleLarge!
+                            .color,
                       ),
                     ),
                     backgroundColor: Theme.of(context).colorScheme.primary,
@@ -99,14 +101,14 @@ class _OrderButtonState extends State<OrderButton> {
               widget.cart
                   .clear(); // Only listen to changes in "cart", not in "orders"
             },
-      child: _isLoading
-          ? const CircularProgressIndicator()
-          : const Text('ORDER NOW'),
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all(
           Theme.of(context).colorScheme.primary,
         ),
       ),
+      child: _isLoading
+          ? const CircularProgressIndicator()
+          : const Text('ORDER NOW'),
     );
   }
 }

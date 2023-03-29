@@ -7,7 +7,8 @@
     {
       "name": "mobile_shopping_cart",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "flutterMode": "release"
     },
     {
       "name": "mobile_shopping_cart (profile mode)",

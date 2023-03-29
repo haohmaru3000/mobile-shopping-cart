@@ -17,6 +17,7 @@ import './helpers/custom_route.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final ThemeData theme = ThemeData();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -54,10 +55,10 @@ class MyApp extends StatelessWidget {
               TargetPlatform.android: CustomPageTransitionBuilder(),
               TargetPlatform.iOS: CustomPageTransitionBuilder(),
             }),
-            colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.purple,
-              accentColor: Colors.deepOrange,
-              errorColor: Colors.red,
+            colorScheme: theme.colorScheme.copyWith(
+              primary: Colors.purple,
+              secondary: Colors.deepOrange,
+              error: Colors.red,
             ),
           ),
           home: auth.isAuth
