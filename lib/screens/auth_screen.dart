@@ -14,6 +14,8 @@ enum AuthMode {
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
 
+  const AuthScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -254,6 +256,7 @@ class _AuthCardState extends State<AuthCard>
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
                     }
+                    return null;
                   },
                   onSaved: (value) {
                     _authData['email'] = value!;
@@ -308,20 +311,20 @@ class _AuthCardState extends State<AuthCard>
                   ElevatedButton(
                     onPressed: _submit,
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                       padding:
-                          MaterialStateProperty.all(const EdgeInsets.symmetric(
+                          WidgetStateProperty.all(const EdgeInsets.symmetric(
                         horizontal: 30.0,
                         vertical: 8.0,
                       )),
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                           Theme.of(context).primaryColor),
-                      foregroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryTextTheme.button!.color),
+                      foregroundColor: WidgetStateProperty.all(
+                          Theme.of(context).primaryTextTheme.labelLarge!.color),
                     ),
                     child:
                         Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
@@ -329,12 +332,11 @@ class _AuthCardState extends State<AuthCard>
                 TextButton(
                   onPressed: _switchAuthMode,
                   style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 4)),
+                    padding: WidgetStateProperty.all(const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 4)),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    foregroundColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor),
+                    foregroundColor:
+                        WidgetStateProperty.all(Theme.of(context).primaryColor),
                   ),
                   child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),

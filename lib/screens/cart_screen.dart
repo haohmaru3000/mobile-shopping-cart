@@ -8,6 +8,8 @@ import '../widgets/cart_item.dart';
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
 
+  const CartScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -102,7 +104,7 @@ class _OrderButtonState extends State<OrderButton> {
                   .clear(); // Only listen to changes in "cart", not in "orders"
             },
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(
+        foregroundColor: WidgetStateProperty.all(
           Theme.of(context).colorScheme.primary,
         ),
       ),

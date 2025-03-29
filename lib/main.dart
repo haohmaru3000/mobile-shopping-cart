@@ -18,6 +18,8 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   final ThemeData theme = ThemeData();
+
+  MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Shopping cart',
           theme: ThemeData(
             fontFamily: 'Lato',
